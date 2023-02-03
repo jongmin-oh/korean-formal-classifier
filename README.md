@@ -20,8 +20,8 @@ formal classifier or honorific classifier
  
  #### 사용 모델 
  beomi/kcbert-base 
-  GitHub : https://github.com/Beomi/KcBERT
-  HuggingFace : https://huggingface.co/beomi/kcbert-base
+  - GitHub : https://github.com/Beomi/KcBERT
+  - HuggingFace : https://huggingface.co/beomi/kcbert-base
 ***
 
 ## 데이터
