@@ -36,7 +36,7 @@ class FormalClassifier(object):
         else:
             return False
 
-    def formal_persentage(self, text):
+    def formal_percentage(self, text):
         return float(self.predict(text)[0][1])
 
     def print_message(self, text):
