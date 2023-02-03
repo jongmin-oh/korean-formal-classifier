@@ -18,6 +18,20 @@ formal classifier or honorific classifier
  wget https://raw.githubusercontent.com/smilegate-ai/korean_smile_style_dataset/main/smilestyle_dataset.tsv
  ```
  
+ ### 개발 환경
+ ```bash
+ Python3.9
+ ```
+ 
+ ```bash
+torch==1.13.1
+pytorch-lightning==1.9.0
+transformers==4.26.0
+scikit-learn-1.2.1
+pandas-1.5.3
+ ```
+ 
+ 
  #### 사용 모델 
  beomi/kcbert-base 
   - GitHub : https://github.com/Beomi/KcBERT
