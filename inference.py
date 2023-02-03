@@ -40,7 +40,7 @@ class FormalClassifier(object):
         return round(float(self.predict(text)[0][1]), 2)
 
     def print_message(self, text):
-        result = self.formal_persentage(text)
+        result = self.formal_percentage(text)
         if result > 0.5:
             print(f'{text} : 존댓말입니다. ( 확률 {result*100}% )')
         if result < 0.5:
