@@ -20,8 +20,8 @@ formal classifier or honorific classifier
  
  #### 사용 모델 
  beomi/kcbert-base 
-  : https://github.com/Beomi/KcBERT
- 
+  GitHub : https://github.com/Beomi/KcBERT
+  HuggingFace : https://huggingface.co/beomi/kcbert-base
 ***
 
 ## 데이터 예제
@@ -55,4 +55,26 @@ python3 inference.py
 ```
 저번에 교수님께서 자료 가져오라하셨는데 기억나세요? : 존댓말입니다. ( 확률 99.19% )
 저번에 교수님께서 자료 가져오라했는데 기억나? : 반말입니다. ( 확률 92.86% )
+```
+
+
+
+***
+```bash
+@misc{SmilegateAI2022KoreanSmileStyleDataset,
+  title         = {SmileStyle: Parallel Style-variant Corpus for Korean Multi-turn Chat Text Dataset},
+  author        = {Seonghyun Kim},
+  year          = {2022},
+  howpublished  = {\url{https://github.com/smilegate-ai/korean_smile_style_dataset}},
+}
+```
+
+```bash
+@inproceedings{lee2020kcbert,
+  title={KcBERT: Korean Comments BERT},
+  author={Lee, Junbum},
+  booktitle={Proceedings of the 32nd Annual Conference on Human and Cognitive Language Technology},
+  pages={437--440},
+  year={2020}
+}
 ```
