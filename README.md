@@ -24,11 +24,12 @@ formal classifier or honorific classifier
   HuggingFace : https://huggingface.co/beomi/kcbert-base
 ***
 
-## 데이터 예제
+## 데이터
 ```bash
 get_train_data.py
 ```
 
+### 예시
 |sentence|label|
 |------|---|
 |공부를 열심히 해도 열심히 한 만큼 성적이 잘 나오지 않아|0|
@@ -36,6 +37,13 @@ get_train_data.py
 |참 열심히 사신 보람이 있으시네요|1|
 |나도 스시 좋아함 이번 달부터 영국 갈 듯|0|
 |본부장님이 내가 할 수 없는 업무를 계속 주셔서 힘들어|0|
+
+
+### 분포
+|label|train|test|
+|------|---|---|
+|0|133430|34908|
+|1|112828|29839|
 
 ***
 
@@ -60,6 +68,8 @@ python3 inference.py
 
 
 ***
+
+## 인용(License)
 ```bash
 @misc{SmilegateAI2022KoreanSmileStyleDataset,
   title         = {SmileStyle: Parallel Style-variant Corpus for Korean Multi-turn Chat Text Dataset},
