@@ -37,14 +37,14 @@ class FormalClassifier(object):
             return False
 
     def formal_percentage(self, text):
-        return float(self.predict(text)[0][1])
+        return round(float(self.predict(text)[0][1]), 2)
 
     def print_message(self, text):
         result = self.formal_persentage(text)
         if result > 0.5:
-            print(f'{text} : 존댓말입니다. ( 확률 {round((result*100), 2)}% )')
+            print(f'{text} : 존댓말입니다. ( 확률 {result*100}% )')
         if result < 0.5:
-            print(f'{text} : 반말입니다. ( 확률 {round(((1 - result)*100), 2)}% )')
+            print(f'{text} : 반말입니다. ( 확률 {((1 - result)*100)}% )')
 
 
 if __name__ == '__main__':
