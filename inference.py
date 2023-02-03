@@ -24,15 +24,25 @@ class FormalClassifier(object):
             self.model(**self.model.tokenizer(texts, return_tensors='pt')
                        ).logits, dim=-1)
 
+    def is_formal(self, text):
+        if self.predict(text)[0][1] > self.predict(text)[0][0]:
+            return True
+        else:
+            return False
+
+    def formal_persentage(self, text):
+        return float(self.predict(text)[0][1])
+
     def print_message(self, text):
-        result = float(self.predict(text)[0][0])
+        result = self.formal_persentage(text)
         if result > 0.5:
-            print(f'{text} : 반말입니다. ( 확률 {round((result*100), 2)}% )')
+            print(f'{text} : 존댓말입니다. ( 확률 {round((result*100), 2)}% )')
         if result < 0.5:
-            print(f'{text} : 존댓말입니다. ( 확률 {round(((1 - result)*100), 2)}% )')
+            print(f'{text} : 반말입니다. ( 확률 {round(((1 - result)*100), 2)}% )')
 
 
 if __name__ == '__main__':
     classifier = FormalClassifier(latest_model_path)
+    print(classifier.is_formal('안녕'))
     classifier.print_message('저번에 교수님께서 자료 가져오라하셨는데 기억나세요?')
     classifier.print_message('저번에 교수님께서 자료 가져오라했는데 기억나?')
