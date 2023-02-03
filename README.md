@@ -11,7 +11,7 @@ formal classifier or honorific classifier
  : https://github.com/smilegate-ai/korean_smile_style_dataset
 
 #### AI 허브 감성 대화 말뭉치
- : https://www.aihub.or.kr/aihubdata/data
+ : https://www.aihub.or.kr/
  
  #### 데이터셋 다운로드(AI허브는 직접다운로드만 가능)
  ```bash
