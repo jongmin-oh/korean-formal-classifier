@@ -6,6 +6,7 @@ from transformers import AutoModelForSequenceClassification, AdamW, AutoTokenize
 from torch.optim.lr_scheduler import ExponentialLR
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MODEL_NAME = 'beomi/kcbert-base'
 
 
@@ -14,7 +15,7 @@ class FormalClassfication(pl.LightningModule):
         super().__init__()
         self.lr = lr
         self.clsfier = AutoModelForSequenceClassification.from_pretrained(
-            model_name)
+            model_name).to(device)
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     def forward(self, **kwargs):
