@@ -59,6 +59,18 @@ python3 modeling/train.py
 python3 inference.py
 ```
 
+```python
+def formal_percentage(self, text):
+    return round(float(self.predict(text)[0][1]), 2)
+
+def print_message(self, text):
+    result = self.formal_persentage(text)
+    if result > 0.5:
+        print(f'{text} : 존댓말입니다. ( 확률 {round((result*100), 2)}% )')
+    if result < 0.5:
+        print(f'{text} : 반말입니다. ( 확률 {round(((1 - result)*100), 2)}% )')
+```
+
 결과 
 ```
 저번에 교수님께서 자료 가져오라하셨는데 기억나세요? : 존댓말입니다. ( 확률 99.19% )
