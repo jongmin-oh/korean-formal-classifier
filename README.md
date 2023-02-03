@@ -25,7 +25,6 @@ formal classifier or honorific classifier
 ***
 
 ## 데이터 예제
-
 ```bash
 get_train_data.py
 ```
