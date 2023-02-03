@@ -35,3 +35,4 @@ class FormalClassifier(object):
 if __name__ == '__main__':
     classifier = FormalClassifier(latest_model_path)
     classifier.print_message('저번에 교수님께서 자료 가져오라하셨는데 기억나세요?')
+    classifier.print_message('저번에 교수님께서 자료 가져오라했는데 기억나?')

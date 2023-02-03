@@ -6,7 +6,7 @@ from pathlib import Path
 from pecab import PeCab
 
 smg_df = pd.read_csv("smilestyle_dataset.tsv", sep="\t")
-chat_df = pd.read_csv('aihub_sentiment_dataset.tsv',sep='\t')
+chat_df = pd.read_csv('aihub_sentiment_dataset.tsv', sep='\t')
 
 BASE_DIR = str(Path(__file__).resolve().parent.parent)
 
@@ -38,9 +38,9 @@ informal_data = smg_infomal + chat_informal
 data = pd.concat([pd.DataFrame({'sentence': informal_data, "label": 0}), pd.DataFrame(
     {'sentence': formal_data, "label": 1})])
 
-# 토큰화
-tokenizer = PeCab()
-data['sentence'] = data['sentence'].apply(lambda x: tokenizer.tokenize(x))
+# # 토큰화
+# tokenizer = PeCab()
+# data['sentence'] = data['sentence'].apply(lambda x: tokenizer.tokenize(x))
 
 # 셔플
 data = data.sample(frac=1)
@@ -61,6 +61,9 @@ test.drop_duplicates(subset=['sentence'], inplace=True, ignore_index=True)
 
 if not os.path.exists(BASE_DIR + "/modeling/data"):
     os.makedirs(BASE_DIR + "/modeling/data")
+
+print(train['label'].value_counts())
+print(test['label'].value_counts())
 
 # 데이터 내보내기
 test.to_csv(BASE_DIR + "/modeling/data/test.tsv", sep="\t")
