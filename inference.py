@@ -4,6 +4,7 @@ from modeling.model.kcbert import FormalClassfication
 
 from glob import glob
 from pathlib import Path
+from utils import clean
 
 BASE_DIR = str(Path(__file__).resolve().parent)
 latest_model_path = glob(BASE_DIR + '/modeling/saved_model/*.ckpt')[-1]
@@ -17,6 +18,7 @@ class FormalClassifier(object):
         self.model = FormalClassfication.load_from_checkpoint(self.model_path)
 
     def predict(self, text: str):
+        text = clean(text)
         inputs = self.model.tokenizer(
             text, return_tensors="pt", max_length=128, truncation=True)
         input_ids = inputs["input_ids"].to(device)
@@ -49,5 +51,6 @@ class FormalClassifier(object):
 
 if __name__ == '__main__':
     classifier = FormalClassifier(latest_model_path)
-    classifier.print_message('저번에 교수님께서 자료 가져오라하셨는데 기억나세요?')
-    classifier.print_message('저번에 교수님께서 자료 가져오라했는데 기억나?')
+    classifier.print_message('지금은 일하고있어요ㅠㅠ')
+    classifier.print_message('점심은 먹었니?')
+    classifier.print_message('밥 먹었뉘?')

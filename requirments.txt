@@ -1,5 +1,7 @@
 torch==1.13.1
 pytorch-lightning==1.9.0
 transformers==4.26.0
-scikit-learn-1.2.1
-pandas-1.5.3
+scikit-learn==1.2.1
+pandas==1.5.3
+emoji==2.2.0
+soynlp==0.0.493
