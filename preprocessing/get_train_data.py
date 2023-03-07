@@ -3,12 +3,12 @@ import itertools
 import os
 from typing import Final, List
 from pathlib import Path
-from pecab import PeCab
 
-smg_df = pd.read_csv("smilestyle_dataset.tsv", sep="\t")
-chat_df = pd.read_csv('aihub_sentiment_dataset.tsv', sep='\t')
+smg_df = pd.read_csv("./meta/smilestyle_dataset.tsv", sep="\t")
+chat_df = pd.read_csv('./meta/aihub_sentiment_dataset.tsv', sep='\t')
 
-BASE_DIR = str(Path(__file__).resolve().parent.parent)
+BASE_DIR = Path(__file__).resolve().parent.parent
+EXPORT_DIR = BASE_DIR.joinpath("modeling", "data")
 
 
 def df2sentence(df: pd.DataFrame, cols: List[str]) -> List[str]:
@@ -46,25 +46,31 @@ data = pd.concat([pd.DataFrame({'sentence': informal_data, "label": 0}), pd.Data
 data = data.sample(frac=1)
 data.reset_index(drop=True, inplace=True)
 
-test_rate: Final[float] = 0.2
+split_rate: Final[float] = 0.1
 
 # 테스트&검증 데이터 비율 설정
-test_ = int(len(data) * test_rate)
+range_ = int(len(data) * split_rate)
 
 # 데이터 분할
-test = data[:test_]
-train = data[test_:]
+dev = data[:range_]
+test = data[range_:range_ * 2]
+train = data[range_ * 2:]
+
 
 # 중복 제거
 train.drop_duplicates(subset=['sentence'], inplace=True, ignore_index=True)
 test.drop_duplicates(subset=['sentence'], inplace=True, ignore_index=True)
+dev.drop_duplicates(subset=['sentence'], inplace=True, ignore_index=True)
 
-if not os.path.exists(BASE_DIR + "/modeling/data"):
-    os.makedirs(BASE_DIR + "/modeling/data")
 
-print(train['label'].value_counts())
-print(test['label'].value_counts())
+if not os.path.exists(EXPORT_DIR):
+    os.makedirs(EXPORT_DIR)
+
+# print("train label rate: ",train['label'].value_counts())
+# print("dev label rate: ",dev['label'].value_counts())
+# print("test label rate: ",test['label'].value_counts())
 
 # 데이터 내보내기
-test.to_csv(BASE_DIR + "/modeling/data/test.tsv", sep="\t")
-train.to_csv(BASE_DIR + "/modeling/data/train.tsv", sep="\t")
+train.to_csv(EXPORT_DIR.joinpath("train.tsv"), sep="\t")
+dev.to_csv(EXPORT_DIR.joinpath("dev.tsv"), sep="\t")
+test.to_csv(EXPORT_DIR.joinpath("test.tsv"), sep="\t")

@@ -1,26 +1,30 @@
+import transformers
 import torch
-import os
-from modeling.model.kcbert import FormalClassfication
-
-from glob import glob
 from pathlib import Path
+
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from utils import clean
 
 BASE_DIR = str(Path(__file__).resolve().parent)
-latest_model_path = glob(BASE_DIR + '/modeling/saved_model/*.ckpt')[-1]
+# model_token = os.getenv('MODEL_TOKEN')
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+latest_model_path = BASE_DIR + '/modeling/saved_model/formal_classifier_latest'
+device = 'cpu'
+
+# pipeline = transformers.pipeline(
+#     "text-classification", model=model, tokenizer=tokenizer)
 
 
 class FormalClassifier(object):
-    def __init__(self, model_path: str):
-        self.model_path: str = model_path
-        self.model = FormalClassfication.load_from_checkpoint(self.model_path)
+    def __init__(self):
+        self.model = AutoModelForSequenceClassification.from_pretrained(
+            latest_model_path).to(device)
+        self.tokenizer = AutoTokenizer.from_pretrained('beomi/kcbert-base')
 
     def predict(self, text: str):
         text = clean(text)
-        inputs = self.model.tokenizer(
-            text, return_tensors="pt", max_length=128, truncation=True)
+        inputs = self.tokenizer(
+            text, return_tensors="pt", max_length=64, truncation=True, padding="max_length")
         input_ids = inputs["input_ids"].to(device)
         token_type_ids = inputs["token_type_ids"].to(device)
         attentsion_mask = inputs["attention_mask"].to(device)
@@ -49,8 +53,7 @@ class FormalClassifier(object):
             print(f'{text} : 반말입니다. ( 확률 {((1 - result)*100)}% )')
 
 
-if __name__ == '__main__':
-    classifier = FormalClassifier(latest_model_path)
-    classifier.print_message('지금은 일하고있어요ㅠㅠ')
-    classifier.print_message('점심은 먹었니?')
-    classifier.print_message('밥 먹었뉘?')
+if __name__ == "__main__":
+    classifier = FormalClassifier()
+    classifier.print_message("저번에 교수님께서 자료 가져오라고 하셨는데 기억나세요?")
+    classifier.print_message("저번에 교수님이 자료 가져오라고 하셨는데 기억나?")
