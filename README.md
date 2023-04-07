@@ -105,7 +105,7 @@ def print_message(self, text):
 
 ***
 
-## 인용(License)
+## 인용
 ```bash
 @misc{SmilegateAI2022KoreanSmileStyleDataset,
   title         = {SmileStyle: Parallel Style-variant Corpus for Korean Multi-turn Chat Text Dataset},
