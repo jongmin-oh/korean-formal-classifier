@@ -13,6 +13,17 @@ formal classifier or honorific classifier
 라는 문구를 "께서"라는 존칭때문에 전체문장을 존댓말로 판단하는 오류가 많이 발생했다. <br>
  그래서 이번에 딥러닝 모델을 만들고 그 과정을 공유해보고자한다.
 
+빠르게 가져다 쓰실 분들은 아래 코드로 바로 사용하실 수 있습니다.
+```python
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+
+model = AutoModelForSequenceClassification.from_pretrained("j5ng/kcbert-formal-classifier")
+tokenizer = AutoTokenizer.from_pretrained('j5ng/kcbert-formal-classifier')
+
+formal_classifier = pipeline(task="text-classification", model=model, tokenizer=tokenizer)
+print(formal_classifier("저번에 교수님께서 자료 가져오라했는데 기억나?")) # [{'label': 'LABEL_0', 'score': 0.9999139308929443}]
+```
+
 ***
 
 ### 데이터 셋 출처
