@@ -28,6 +28,8 @@ print(formal_classifier("저번에 교수님께서 자료 가져오라했는데 
 #### Batch Inference Using Cuda
 ```python
 import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
+from tqdm import tqdm
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
