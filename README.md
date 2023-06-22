@@ -25,6 +25,37 @@ print(formal_classifier("저번에 교수님께서 자료 가져오라했는데 
 # [{'label': 'LABEL_0', 'score': 0.9999139308929443}]
 ```
 
+#### Batch Inference Using GPU
+```python
+import torch
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+model_name = "j5ng/kcbert-formal-classifier"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name).to(device)
+
+formal_classifier = pipeline(
+    task="text-classification", 
+    model=model, 
+    tokenizer=tokenizer, 
+    device=0 if torch.cuda.is_available() else -1, 
+    batch_size=128,
+)
+
+chunk_size = 1000  # 각 청크의 크기를 1000으로 설정
+chunks = [sentence[i:i+chunk_size] for i in range(0, len(sentence), chunk_size)]  # 텍스트 리스트를 청크로 나눔
+
+scores = []
+for chunk in tqdm(chunks):
+    batch_scores = formal_classifier(chunk)
+    batch_scores = [round(1 - i['score'], 2) if i['label'] == 'LABEL_0' else round(i['score'],2) for i in batch_scores]
+    scores.extend(batch_scores)
+ 
+# print(scores)
+
+```
+
 ***
 
 ### 데이터 셋 출처
