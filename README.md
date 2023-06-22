@@ -25,7 +25,7 @@ print(formal_classifier("저번에 교수님께서 자료 가져오라했는데 
 # [{'label': 'LABEL_0', 'score': 0.9999139308929443}]
 ```
 
-#### Batch Inference Using GPU
+#### Batch Inference Using Cuda
 ```python
 import torch
 
